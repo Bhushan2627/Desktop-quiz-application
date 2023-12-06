@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+form {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#logout-btn {
+  background-color: #f44336;
+}
+
+#score-display {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Added CSS for one question per row */
+#quiz-form label {
+  display: block;
+  margin-bottom: 10px;
+}

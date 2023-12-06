@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Application</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-top: 20px;
+    }
+    #quiz {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    #quiz p {
+      margin-top: 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    #submitBtn {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+    #submitBtn:hover {
+      background-color: #45a049;
+    }
+    #result {
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz Application</h1>
+  <div id="quiz"></div>
+  <div class="container">
+    <button id="submitBtn">Submit Quiz</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What is the capital of France?",
+        options: ["Paris", "London", "Rome", "Madrid"],
+        answer: "Paris"
+      },
+      {
+        question: "Which country is known as the Land of the Rising Sun?",
+        options: ["China", "Japan", "Thailand", "South Korea"],
+        answer: "Japan"
+      },
+      {
+        question: "What is the largest planet in our solar system?",
+        options: ["Jupiter", "Saturn", "Mars", "Earth"],
+        answer: "Jupiter"
+      }
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+    const submitButton = document.getElementById("submitBtn");
+    const resultContainer = document.getElementById("result");
+
+    function displayQuiz() {
+      let quizHTML = "";
+      quizData.forEach((question, index) => {
+        const optionsHTML = question.options
+          .map(
+            (option, optionIndex) => `
+              <label>
+                <input type="radio" name="question${index}" value="${option}">
+                ${option}
+              </label>
+            `
+          )
+          .join("");
+
+        quizHTML += `
+          <div>
+            <p>${index + 1}. ${question.question}</p>
+            ${optionsHTML}
+          </div>
+        `;
+      });
+
+      quizContainer.innerHTML = quizHTML;
+    }
+
+    function submitQuiz() {
+      const userAnswers = [];
+      const answerInputs = document.querySelectorAll("input[type='radio']:checked");
+
+      answerInputs.forEach((input) => {
+        userAnswers.push(input.value);
+      });
+
+      let score = 0;
+      quizData.forEach((question, index) => {
+        if (question.answer === userAnswers[index]) {
+          score++;
+        }
+      });
+
+      const totalQuestions = quizData.length;
+      const resultMessage = `You scored ${score} out of ${totalQuestions} questions.`;
+      resultContainer.textContent = resultMessage;
+    }
+
+    displayQuiz();
+    submitButton.addEventListener("click", submitQuiz);
+  </script>
+</body>
+</html>
